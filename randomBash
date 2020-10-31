@@ -1,0 +1,29 @@
+#!/bin/bash
+# bash genera un numero aleatorio del 1 al 9 y compara con un numero de entrada
+
+function NEW_UUID(){
+  # bash generate random 32 character alphanumeric string (upper and lowercase) and 
+  NEW_UUID=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+echo $NEW_UUID
+}
+function NEW_DIGITS(){
+  # bash generate random number between 0 and 99
+NUMBER=$(cat /dev/urandom | tr -dc '0-9' | fold -w 256 | head -n 1 | sed -e 's/^0*//' | head --bytes 2)
+if [ "$NUMBER" == "" ]; then
+  NUMBER=0
+fi
+ echo $NUMBER
+  }
+
+function main(){
+  echo "Dame un número del 1 al 9"
+  read input
+  NUMBER=$(cat /dev/urandom | tr -dc '0-9' | fold -w 256 | head -n 1 | sed -e 's/^0*//' | head --bytes 1)
+    echo "El número que yo calcule es: "
+    if [ "$NUMBER" == "$input" ]; then
+    echo "Yeeeeiii felicidades, adivinaste el numero que pense"
+    fi
+    echo $NUMBER
+
+}
+main
